@@ -1,0 +1,7 @@
+spring:
+    datasource:
+      url: jdbc:h2:mem:testdb;INIT=RUNSCRIPT FROM 'classpath:init.sql'
+      driverClassName: org.h2.Driver
+      username: sa
+      password:
+      database-platform: org.h2.Driver
