@@ -1,0 +1,20 @@
+    create table restaurant
+(
+    id biging,
+    restaurant_name varchar(256),
+    restaurant_email varchar(256),
+    restaurant_order_email varchar(256),
+    restaurant_phone_number varchar(256),
+    restaurant_latitude varchar(256),
+    restaurant_longitude varchar(256),
+    restaurant_address1 varchar(256),
+    restaurant_address2 varchar(256),
+    restaurant_city varchar(256),
+    restaurant_state varchar(256),
+    restaurant_zip_code varchar(256),
+    restaurant_country varchar(256),
+    restaurant_credit_card_processing_rate double precision,
+    restaurant_credit_card_processing_fee double precision,
+    restaurant_delivery_percent double precision,
+    restaurant_location_number varchar(256),
+)
