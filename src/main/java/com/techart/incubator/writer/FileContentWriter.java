@@ -12,14 +12,10 @@ public class FileContentWriter implements ContentWriter {
         this.file = file;
     }
 
-    public void saveContent(String content) throws IOException{
+    public void saveContent(String content) throws IOException {
         FileOutputStream o = new FileOutputStream(file);
-        try {
-            for (int i = 0; i < content.length(); i += 1) {
-                o.write(content.charAt(i));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        for (int i = 0; i < content.length(); i += 1) {
+            o.write(content.charAt(i));
         }
     }
 
