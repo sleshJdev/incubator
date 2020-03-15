@@ -9,7 +9,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Unit test for simple App.
@@ -17,16 +17,30 @@ import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 @SpringJUnitConfig
 @DataJdbcTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class AppTest {
+class AppTest {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
     @Test
-    public void testRecordRowMapper() {
+    void testRecordRowMapperWithNoRecordClassThenShouldThrow() {
+        class Pojo {
+
+        }
+        final var exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> new RecordRowMapper<>(Pojo.class),
+                "Should throw exception if none-record was passed");
+        assertEquals(exception.getMessage(),
+                "class by.slesh.spring.jdbc.core.AppTest$1Pojo should be a record class");
+    }
+
+    @Test
+    void testRecordRowMapper() {
         final List<Billionaire> billionaires =
                 jdbcTemplate.query(
                         """
                                 select * from billionaires
+                                order by id
                                 """,
                         new RecordRowMapper<>(Billionaire.class)
                 );
@@ -47,7 +61,7 @@ public class AppTest {
                                 "Billionaire Tech Entrepreneur"
                         ),
                         new Billionaire(
-                                1,
+                                3,
                                 "Folrunsho",
                                 "Alakija",
                                 "Billionaire Oil Magnate"
